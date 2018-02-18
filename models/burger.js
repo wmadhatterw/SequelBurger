@@ -1,20 +1,27 @@
 
+
+// reference standard lib sequelize
+var Sequelize = require("sequelize");
+// references our connection to the DB.
+// var connection = require("../config/connection.js");
+
 module.exports = function(sequelize, DataTypes) {
-  var Burger = sequelize.define("Burger", {
+  var Burgers = sequelize.define("Burgers", {
     burger_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
     },
     devoured: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      allowNull: false,
+      defaultValue: false,
+      len: [1]
     }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Burger.hasOne(models.Customer);
-      }
-    }
+    }, {timestamps:  true
+    
   });
-  return Burger;
+  return Burgers;
 };
