@@ -34,8 +34,8 @@ module.exports = function(app) {
   app.post("/api/create", function(req, res) {
     //npm package body-parser to access Burger model properties.
     db.Burgers.create({
-      name: req.body.name,
-      munchy: req.body.devour
+      burger_name: req.body.burger_name,
+      devoured: req.body.devour
     }).then(function(createdBurger) {
       res.redirect("/");
     });
@@ -45,7 +45,7 @@ module.exports = function(app) {
   app.post("/api/update", function(req, res) {
     console.log("the id is: "+ req.body.burger_id[0]);
     db.Burgers.update({
-      munchy: true
+      devoured: true
       },
       {
         where: {

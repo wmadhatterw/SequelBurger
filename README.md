@@ -1,2 +1,2 @@
-# SequelizeBurger
+# sequelizedBurger
 Burger application.
