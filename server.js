@@ -1,23 +1,25 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-overide');
-const exphbs = require('express-handlebars');
+var express = require("express");
+var bodyParser = require("body-parser");
 
-const app = express();
+var port = process.env.PORT || 3000;
 
-app.use(express.static(_dirname+ '/public'));
+var app = express();
 
-app.use(bodyParser.urlencoded({
-	extended: false
-}));
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
 
-app.use(methodOverride('_method'));
-app.engine('handlebars', exphbs({
-	defaultLayout: 'main'
-}));
-app.set('view engine', 'handlebars');
+app.use(bodyParser.urlencoded({ extended: false }));
 
-const port = process.env.PORT || 3000;
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgersController.js");
+
+app.use("/", routes);
+
 app.listen(port);
-
-console.log("your listening on port: "+ port)
+console.log("listening on port: " + port)
